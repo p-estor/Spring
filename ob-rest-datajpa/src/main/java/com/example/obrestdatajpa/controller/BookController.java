@@ -2,6 +2,8 @@ package com.example.obrestdatajpa.controller;
 
 import com.example.obrestdatajpa.entities.Book;
 import com.example.obrestdatajpa.repository.BookRepository;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.juli.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +28,6 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
-
-    // getters y setters
-
-
-    // CRUD sobre la identidad Book
-
     // Buscar todos los libros
     @GetMapping("/api/books")
     public List<Book> findAll() {
@@ -41,7 +37,8 @@ public class BookController {
 
     // Buscar un solo libro en base de datos según su id
     @GetMapping("/api/books/{id}")
-    public ResponseEntity<Book> findOneByID(@PathVariable Long id) {
+    @ApiOperation("Buscar un libro por clave primaria id Long")
+    public ResponseEntity<Book> findOneByID(@ApiParam("Clave primaria tipo Long") @PathVariable Long id) {
 
         Optional<Book> bookOpt = bookRepository.findById(id);
 
